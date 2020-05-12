@@ -11,8 +11,9 @@ y_test=np.array([101,102,103,104,105,106,107,108,109,110])
 #모델 구성
 model=Sequential()
 model.add(Dense(500,input_dim=1, activation='relu'))
-model.add(Dense(300))
-model.add(Dense(400))
+model.add(Dense(30))
+model.add(Dense(40))
+model.add(Dense(20))
 model.add(Dense(1,activation='relu'))
 
 #모델 요약
