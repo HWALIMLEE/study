@@ -1,4 +1,4 @@
-from keras.models import Sequential
+from keras.models import Sequential #케라스에 있는 순차적인 모델 구현
 from keras.layers import Dense
 import numpy as np
 
@@ -10,14 +10,14 @@ y_test=np.array([101,102,103,104,105,106,107,108,109,110])
 
 #모델 구성
 model=Sequential()
-model.add(Dense(500,input_dim=1, activation='relu'))
-model.add(Dense(30))
-model.add(Dense(40))
-model.add(Dense(20))
+model.add(Dense(5,input_dim=1, activation='relu')) #dimension차원, 데이터 한개만 넣었기 때문에 일차원
+model.add(Dense(3))
+model.add(Dense(2))
 model.add(Dense(1,activation='relu'))
 
 #모델 요약
 model.summary()
+
 
 #compile과 훈련
 model.compile(loss='mse',optimizer='adam',metrics=['accuracy'])
@@ -30,5 +30,6 @@ print("loss:",loss)
 print("acc:",acc)
 
 output=model.predict(x_test)
-print(output)#study
+print(output)
+
 
