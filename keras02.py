@@ -17,6 +17,9 @@ model.add(Dense(1,activation='relu'))
 
 #모델 요약
 model.summary()
+#39번 연산했다
+#총 파라미터 값 
+#파라미터는 라인의 개수로 생각할 것
 
 
 #compile과 훈련
