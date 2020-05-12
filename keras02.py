@@ -1,3 +1,4 @@
+#모듈 불러오기
 from keras.models import Sequential #케라스에 있는 순차적인 모델 구현
 from keras.layers import Dense
 import numpy as np
