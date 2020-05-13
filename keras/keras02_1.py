@@ -3,9 +3,9 @@ from keras.models import Sequential
 from keras.layers import Dense
 
 x_train=np.array([1,2,3,4,5,6,7,8,9,10])
-y_train=np.array([1,2,3,4,5,6,7,8,9,10])
-x_test=np.array([101,102,103,104,105,106,107,108,109,110])
-y_test=np.array([101,102,103,104,105,106,107,108,109,110])
+y_train=np.array([10,20,30,40,50,60,70,80,90,100])
+x_test=np.array([11,12,13,14,15,16,17,18,19,20])
+y_test=np.array([110,120,130,140,150,160,170,180,190,200])
 
 model=Sequential()
 model.add(Dense(50,input_dim=1,activation='relu'))
@@ -14,7 +14,6 @@ model.add(Dense(40))
 model.add(Dense(20))
 model.add(Dense(1,activation='relu'))
 
-#parameter는 라인의 개수로 생각할 것
 model.summary()
 
 model.compile(loss='mse',optimizer='adam',metrics=['accuracy'])
