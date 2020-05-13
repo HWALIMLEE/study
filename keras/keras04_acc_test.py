@@ -1,7 +1,7 @@
 #1. 데이터
 import numpy as np
 x=np.array([1,2,3,4,5,6,7,8,9,10])
-y=np.array([1,2,3,4,5,6,7,8,9,10]) #crtl+c->ctrl+v --->한 라인 카피 shift+delete--->라인 전체 지우기  ctrl+'/'--->한 라인 주석처리
+y=np.array([1,2,3,4,5,6,7,8,9,10]) 
 x_pred=np.array([11,12,13])
 #y_pred를 예측할것
 
