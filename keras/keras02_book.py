@@ -27,5 +27,6 @@ model.fit(x_train,y_train,epochs=100,batch_size=1,validation_data=(x_test,y_test
 loss,acc=model.evaluate(x_test,y_test,batch_size=1)
 print("loss:",loss)
 print("acc:",acc)
+
 output=model.predict(x_test)
 print("결과물:\n",output)
