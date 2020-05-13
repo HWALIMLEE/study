@@ -24,7 +24,7 @@ model.add(Dense(1))
 
 #3.훈련
 model.compile(loss='mse',optimizer='adam',metrics=['acc']) #metrics=['acc']는 진행되는 부분에 acc를 눈으로 보여주는 것
-model.fit(x,y,epochs=30,batch_size=5)#batch_size가 낮다고 해서 꼭 좋은 loss값이 나오는 것은 아니다. #계속 시행했을 때 acc=1.0나오면 좋은 값
+model.fit(x,y,epochs=30,batch_size=5)#batch_size가 낮다고 해서 꼭 좋은 loss값이 나오는 것은 아니다.  #계속 시행했을 때 acc=1.0나오면 좋은 값
 
 #4.평가, 예측
 loss,acc=model.evaluate(x,y,batch_size=5) #model.evaluate 기본적으로 loss, acc반환하는 함수
