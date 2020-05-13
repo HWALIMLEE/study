@@ -6,6 +6,7 @@ from keras.layers import Dense
 x=np.array([1,2,3,4,5,6,7,8,9,10])
 y=np.array([1,2,3,4,5,6,7,8,9,10])
 
+#모델
 model=Sequential()
 model.add(Dense(5,input_dim=1,activation='relu'))
 model.add(Dense(3))
