@@ -36,7 +36,6 @@ loss,mse=model.evaluate(x,y,batch_size=5) #model.evaluate 기본적으로 compil
 print("loss:",loss)
 print("mse:",mse)
 
-
-print("y_predict:",y_pred)
 y_pred=model.predict(x_pred)
+print("y_predict:",y_pred)
 #훈련데이터와 평가용 데이터는 같은 데이터 쓰게 되면 안된다. 과적합
