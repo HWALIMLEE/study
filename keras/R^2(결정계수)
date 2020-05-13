@@ -1,0 +1,7 @@
+R^2=SSR/SST
+>>즉 SST와 SSR이 얼마나 비슷한지
+>>SST와 SSE가 얼마나 다른지
+>>SST=SSE+SSR
+>>SSR: 회귀식과 평균값의 차이
+>>SSE: 회귀식과 실제값의 차이
+>>SST: 총 변동
