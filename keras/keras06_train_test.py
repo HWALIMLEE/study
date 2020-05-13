@@ -28,7 +28,6 @@ model.add(Dense(1))
 
 #3.훈련
 model.compile(loss='mse',optimizer='adam',metrics=['mse']) 
-#metrics=['acc']로 해놓으면 회귀모델인데도 불구하고 0또는 1로 나옴
 model.fit(x_train,y_train,epochs=50,batch_size=1)#batch_size가 낮다고 해서 꼭 좋은 loss값이 나오는 것은 아니다. #계속 시행했을 때 acc=1.0나오면 좋은 값 #훈련train
 
 #4.평가
