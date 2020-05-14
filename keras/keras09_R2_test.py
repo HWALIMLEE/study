@@ -22,46 +22,31 @@ model.add(Dense(50,input_dim=1)) #x,y한덩어리(input_dim=1)
 model.add(Dense(5))
 model.add(Dense(10))
 model.add(Dense(5))
-model.add(Dense(10000))
 model.add(Dense(5))
 model.add(Dense(5))
 model.add(Dense(100))
 model.add(Dense(5))
 model.add(Dense(5))
+model.add(Dense(5))
+model.add(Dense(5))
+model.add(Dense(10))
+model.add(Dense(5))
+model.add(Dense(5))
+model.add(Dense(1000))
+model.add(Dense(5))
+model.add(Dense(10))
+model.add(Dense(5))
 model.add(Dense(10000))
-model.add(Dense(5))
-model.add(Dense(5))
-model.add(Dense(10))
-model.add(Dense(5))
-model.add(Dense(5))
-model.add(Dense(1000))
-model.add(Dense(5))
-model.add(Dense(10))
-model.add(Dense(5))
-model.add(Dense(1000))
 model.add(Dense(1000))
 model.add(Dense(5))
 model.add(Dense(5))
 model.add(Dense(5))
-
-
-
-# model.add(Dense(5))
-# model.add(Dense(5))
-# model.add(Dense(5))
-# model.add(Dense(5))
-# model.add(Dense(5))
-# model.add(Dense(5))
-# model.add(Dense(5))
-
-
-
-
-
-
-
-
-
+model.add(Dense(5))
+model.add(Dense(5))
+model.add(Dense(5))
+model.add(Dense(5))
+model.add(Dense(50))
+model.add(Dense(150))
 
 
 # model.add(Dense(1000000))
@@ -73,7 +58,7 @@ model.add(Dense(1))
 
 #3.훈련
 model.compile(loss='mse',optimizer='adam',metrics=['mse']) 
-model.fit(x_train,y_train,epochs=200,batch_size=1)#batch_size가 낮다고 해서 꼭 좋은 loss값이 나오는 것은 아니다. #계속 시행했을 때 acc=1.0나오면 좋은 값 #훈련train
+model.fit(x_train,y_train,epochs=1000,batch_size=1)#batch_size가 낮다고 해서 꼭 좋은 loss값이 나오는 것은 아니다. #계속 시행했을 때 acc=1.0나오면 좋은 값 #훈련train
 
 
 # 4.평가
