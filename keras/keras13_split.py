@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 x_train,x_test,y_train,y_test=train_test_split(x,y,random_state=60,train_size=0.5,test_size=0.4)
 #train_size와 test_size합이 1이 넘어가면 오류가 생김(train_size=1-test_size)
 #train_size와 test_size합이 1이 안된다면 어떻게 될까?
-#>>
+#>>비율 정한만큼만 나와서 돌아간다. 
 #shuffle은 random_state에 우선한다. 즉, shuffle=False를 하게 되면 random_state에 값을 넣어도 섞이지 않는다. 
 
 
