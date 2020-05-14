@@ -5,7 +5,10 @@ x=np.array(range(1,101)) #시작지점은 1, 뒤에서 -1빼기
 y=np.array(range(101,201)) #weight 값은 1, bias값은 100
 
 from sklearn.model_selection import train_test_split
-x_train,x_test,y_train,y_test=train_test_split(x,y,random_state=60,test_size=0.2)#train_size와 test_size합이 1이 넘어가면 오류가 생김
+x_train,x_test,y_train,y_test=train_test_split(x,y,random_state=60,train_size=0.5,test_size=0.4)
+#train_size와 test_size합이 1이 넘어가면 오류가 생김(train_size=1-test_size)
+#train_size와 test_size합이 1이 안된다면 어떻게 될까?
+#>>
 #shuffle은 random_state에 우선한다. 즉, shuffle=False를 하게 되면 random_state에 값을 넣어도 섞이지 않는다. 
 
 
@@ -64,6 +67,9 @@ model.add(Dense(1))
 model.compile(loss='mse',optimizer='adam',metrics=['mse']) 
 model.fit(x_train, y_train, validation_split=0.2,epochs=100, batch_size=1)
 print("x_train:",x_train)
+print("x_test:",x_test)
+print("x_train_len:",len(x_train))
+print("x_test_len:",len(x_test))
 
  #validation값 fit에 적용
 # metrics에 뜨는 것은 loss, mse, val_loss, val_mse
