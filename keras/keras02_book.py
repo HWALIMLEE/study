@@ -28,5 +28,6 @@ loss,acc=model.evaluate(x_test,y_test,batch_size=1)
 print("loss:",loss)
 print("acc:",acc)
 
+#6. 결과물
 output=model.predict(x_test)
 print("결과물:\n",output)
