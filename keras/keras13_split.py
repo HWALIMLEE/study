@@ -5,7 +5,8 @@ x=np.array(range(1,101)) #시작지점은 1, 뒤에서 -1빼기
 y=np.array(range(101,201)) #weight 값은 1, bias값은 100
 
 from sklearn.model_selection import train_test_split
-x_train,x_test,y_train,y_test=train_test_split(x,y,random_state=60,test_size=0.2)
+x_train,x_test,y_train,y_test=train_test_split(x,y,random_state=60,test_size=0.2)#train_size와 test_size합이 1이 넘어가면 오류가 생김
+#shuffle은 random_state에 우선한다. 즉, shuffle=False를 하게 되면 random_state에 값을 넣어도 섞이지 않는다. 
 
 
 # x_train=x[:60] #index의 0은 여기서 1, 60-1=59번째 인덱스=60 #column이 하나이기 때문에 input_dim=1
@@ -61,7 +62,7 @@ model.add(Dense(1))
 
 #3.훈련-기계
 model.compile(loss='mse',optimizer='adam',metrics=['mse']) 
-model.fit(x_train, y_train, validation_split=0.2,epochs=50, batch_size=1)
+model.fit(x_train, y_train, validation_split=0.2,epochs=100, batch_size=1)
 print("x_train:",x_train)
 
  #validation값 fit에 적용
