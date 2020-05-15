@@ -8,6 +8,10 @@ x=np.array([range(1,101),range(311,411),range(100)]) #--->x=np.transpose(x)로 �
 y=np.array([range(101,201),range(711,811),range(100)])
 #리스트-다 모아져 있는 것, [ ]쓰지 않으면 출력이 안 된다. 
 
+x=np.transpose(x)
+y=np.transpose(y)
+
+
 # print(x)
 # print(x.shape)
 # print(y.shape)
