@@ -1,3 +1,4 @@
+# multi layer perceptron
 #1. 데이터(x, y값 준비)
 import numpy as np
 
@@ -29,34 +30,28 @@ from keras.layers import Dense
 
 model=Sequential()
 
-model.add(Dense(5000,input_dim=3)) #x,y한덩어리(input_dim=1)
+model.add(Dense(50,input_dim=3)) #x,y한덩어리(input_dim=1)
 model.add(Dense(10))
-model.add(Dense(800))
-model.add(Dense(14))
-model.add(Dense(312))
-model.add(Dense(520))
-model.add(Dense(10))
-model.add(Dense(80))
-model.add(Dense(80))
-model.add(Dense(1200))
-model.add(Dense(50000))
-model.add(Dense(50))
-model.add(Dense(10))
-model.add(Dense(10))
-model.add(Dense(1500))
 model.add(Dense(100))
+model.add(Dense(100))
+model.add(Dense(1000))
+model.add(Dense(1000))
+model.add(Dense(1000))
+model.add(Dense(100))
+model.add(Dense(100))
+model.add(Dense(1100))
+model.add(Dense(1100))
+model.add(Dense(1100))
+model.add(Dense(11))
+model.add(Dense(5000))
 model.add(Dense(10))
-model.add(Dense(10))
-model.add(Dense(50))
-model.add(Dense(50))
-model.add(Dense(55000))
-
-model.add(Dense(50))
+model.add(Dense(500))
+model.add(Dense(500))
 model.add(Dense(1)) #output을 3으로 하면 3개이 데이터를 넣었을 때 3개를 예측하는 것은 이상하다. 3개의 상호작용을 통해 하나를 예측하는 것이 더 설득력 있다.
 
 #3.훈련-기계
 model.compile(loss='mse',optimizer='adam',metrics=['mse']) 
-model.fit(x_train, y_train, validation_split=0.2,epochs=30, batch_size=8,verbose=2)
+model.fit(x_train, y_train,epochs=100, batch_size=3,verbose=2)
 # print("x_train:",x_train)
 # print("x_test:",x_test)
 # print("x_train_len:",len(x_train))
@@ -64,7 +59,7 @@ model.fit(x_train, y_train, validation_split=0.2,epochs=30, batch_size=8,verbose
 
 
 # 4.평가
-loss,mse=model.evaluate(x_test,y_test,batch_size=1)
+loss,mse=model.evaluate(x_test,y_test,batch_size=8)
 print("loss:",loss)
 print("mse:",mse)
 
