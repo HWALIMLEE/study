@@ -15,14 +15,13 @@ x2=np.transpose(x2)
 
 
 from sklearn.model_selection import train_test_split
-x1_train,x1_test,y1_train,y1_test=train_test_split(x1,y1,shuffle=False,test_size=0.2)#column채로 잘리게 된다. train=(80,3) test=(20,3) 행의 숫자에 맞춰서 잘림
-x1_val, x1_test, y1_val, y1_test=train_test_split(x1_test,y1_test, shuffle=False, test_size=0.5) 
-
-x2_train,x2_test=train_test_split(x2, shuffle=False, test_size=0.2)
-x2_val,x2_test=train_test_split(x2_test,shuffle=False,test_size=0.5)
-
-y1_train,y1_test=train_test_split(y1,shuffle=False,test_size=0.2)
-y1_val,y1_test=train_test_split(y1_test,shuffle=False,test_size=0.5)
+x1_train,x1_test,x2_train,x2_test,y1_train,y1_test=train_test_split(x1,x2,y1,random_state=60,test_size=0.2) #한번에 분리 가능하다. 
+print("x1_train:",x1_train)
+print("x1_test:",x1_test)
+print("x2_train:",x2_train)
+print("x2_test:",x2_test)
+print("y1_train:",y1_train)
+print("y1_test:",y1_test)
 
 #2. 모델구성 함수형으로 바꿈
 # 함수형은 서로 다른 모델들을 엮을 수 있다-앙상블
@@ -80,7 +79,7 @@ model.summary()
 ##batch_size같이 맞춰주는 게 좋음
 #3.훈련-기계
 model.compile(loss='mse',optimizer='adam',metrics=['mse']) 
-model.fit([x1_train,x2_train],y1_train,validation_data=([x1_val,x2_val],y1_val),epochs=500,batch_size=8,verbose=1) #두 개 이상일떄는 리스트
+model.fit([x1_train,x2_train],y1_train,validation_split=0.2,epochs=500,batch_size=8,verbose=1) #두 개 이상일떄는 리스트
 
 
 # 4.평가
