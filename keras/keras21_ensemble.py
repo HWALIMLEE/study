@@ -17,15 +17,7 @@ y2=np.transpose(y2)
 
 
 from sklearn.model_selection import train_test_split
-x1_train,x1_test,y1_train,y1_test=train_test_split(x1,y1,random_state=60,test_size=0.2)#column채로 잘리게 된다. train=(80,3) test=(20,3) 행의 숫자에 맞춰서 잘림
-x1_val, x1_test, y1_val, y1_test=train_test_split(x1_test,y1_test, random_state=60, test_size=0.5) 
-# print("x_train:",x_train)
-# print("x_test:",x_test)
-# print("x_val:",x_val)
-
-
-x2_train,x2_test,y2_train,y2_test=train_test_split(x2,y2, random_state=60, test_size=0.2)
-x2_val,x2_test,y2_val,y2_test=train_test_split(x2_test,y2_test,random_state=60,test_size=0.5)
+x1_train,x1_test,y1_train,y1_test,x2_train,x2_test,y2_train,y2_test=train_test_split(x1,y1,x2,y2,shuffle=False,test_size=0.2)
 
 #2. 모델구성 함수형으로 바꿈
 # 함수형은 서로 다른 모델들을 엮을 수 있다-앙상블
@@ -85,12 +77,12 @@ model.summary()
 ##batch_size같이 맞춰주는 게 좋음
 #3.훈련-기계
 model.compile(loss='mse',optimizer='adam',metrics=['mse']) 
-model.fit([x1_train,x2_train],[y1_train,y2_train],epochs=10,batch_size=1,verbose=1) #두 개 이상일떄는 리스트
+model.fit([x1_train,x2_train],[y1_train,y2_train],validation_split=0.2,epochs=10,batch_size=1,verbose=1) #두 개 이상일떄는 리스트
 
 
 # 4.평가
 # 출력값이 여러개
-loss,o1_5_loss,o2_5_loss,o1_5_mse,o2_5_mse=model.evaluate([x1_test,x2_test],[y1_test,y2_test],batch_size=1) #loss, o1_5_loss, o2_5_loss, o1_5_mse, o2_5_mse
+loss,o1_5_loss,o2_5_loss,o1_5_mse,o2_5_mse=model.evaluate([x1_test,x2_test],[y1_test,y2_test],batch_size=1) #loss, o1_5_loss, o2_5_loss, o1_5_mse, o2_5_mse output이 2개이므로
 print("loss:",loss)
 # print("mse:",mse)
 
@@ -99,6 +91,7 @@ print("loss:",loss)
 y_predict=model.predict([x1_test,x2_test])
 y1_predict,y2_predict=model.predict([x1_test,x2_test]) 
 print("y1_predict:",y1_predict)
+print("y1_predict_len:",len(y1_predict)) #y1_predict의 개수 세어보기(20개)
 print("y2_predict:",y2_predict)
 print("y_predict:",y_predict)
 
