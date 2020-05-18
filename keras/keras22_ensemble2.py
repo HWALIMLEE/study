@@ -19,16 +19,10 @@ y2=np.transpose(y2)
 y3=np.transpose(y3)
 
 from sklearn.model_selection import train_test_split
-x1_train,x1_test,y1_train,y1_test=train_test_split(x1,y1,shuffle=False,test_size=0.2)#column채로 잘리게 된다. train=(80,3) test=(20,3) 행의 숫자에 맞춰서 잘림
-x1_val, x1_test, y1_val, y1_test=train_test_split(x1_test,y1_test, shuffle=False, test_size=0.5) 
-
-x2_train,x2_test,y2_train,y2_test=train_test_split(x2,y2, shuffle=False, test_size=0.2)
-x2_val,x2_test,y2_val,y2_test=train_test_split(x2_test,y2_test,shuffle=False,test_size=0.5)
-
-
-y3_train,y3_test=train_test_split(y3,shuffle=False,test_size=0.2)
-y3_val,y3_test=train_test_split(y3_test,shuffle=False,test_size=0.5)
-
+x1_train,x1_test,y1_train,y1_test,x2_train,x2_test,y2_train,y2_test,y3_train,y3_test=train_test_split(x1,y1,x2,y2,y3,shuffle=False,test_size=0.2) #한 번에 해도 잘 나오는 것이 확인됨
+print("x1_train_len:",len(x1_train)) #개수 80
+print("x2_test_len:",len(x2_test)) #개수 20
+print("y3_train_len:",len(y3_train)) #개수 80
 
 
 #2. 모델구성 함수형으로 바꿈
@@ -99,7 +93,7 @@ model.summary()
 ##batch_size같이 맞춰주는 게 좋음
 #3.훈련-기계
 model.compile(loss='mse',optimizer='adam',metrics=['mse']) 
-model.fit([x1_train,x2_train],[y1_train,y2_train,y3_train],validation_data=([x1_val,x2_val],[y1_val,y2_val,y3_val]),epochs=100,batch_size=1,verbose=1) #두 개 이상일떄는 리스트
+model.fit([x1_train,x2_train],[y1_train,y2_train,y3_train],validation_split=0.2,epochs=100,batch_size=1,verbose=1) #두 개 이상일떄는 리스트
 
 
 # 4.평가
