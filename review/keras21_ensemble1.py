@@ -6,6 +6,7 @@ x2=np.array([range(501,601),range(111,211),range(100)])
 y1=np.array([range(301,401),range(511,611),range(101,201)])
 y2=np.array([range(101,201),range(411,511),range(811,911)])
 
+#transpose
 x1=np.transpose(x1)
 x2=np.transpose(x2)
 y1=np.transpose(y1)
