@@ -39,6 +39,7 @@ model.summary()
 #3.훈련-기계
 model.compile(loss='mse',optimizer='adam',metrics=['mse']) 
 from keras.callbacks import EarlyStopping
+
 early_stopping=EarlyStopping(monitor='loss',patience=5,mode='auto')
 model.fit(x_train, y_train, validation_split=0.2,epochs=100, batch_size=1,callbacks=[early_stopping])
 # print("x_train:",x_train)
