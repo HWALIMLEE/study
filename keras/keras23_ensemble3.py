@@ -58,7 +58,7 @@ merge1=concatenate([dense1_4,dense2_4],name='merge1') #두 개 이상은 항상 
 
 # 또 레이어 연결(3)
 middle1=Dense(30,name='m1')(merge1)
-middle1=Dense(500,name='m2')(middle1)
+middle1=Dense(50,name='m2')(middle1)
 middle1=Dense(700,name='m3')(middle1)
 
 # 엮은 거 다시 풀어준다(output도 3개 나와야하니까) ---분리(4)
@@ -79,12 +79,12 @@ model.summary()
 ##batch_size같이 맞춰주는 게 좋음
 #3.훈련-기계
 model.compile(loss='mse',optimizer='adam',metrics=['mse']) 
-model.fit([x1_train,x2_train],y1_train,validation_split=0.2,epochs=50,batch_size=3,verbose=1) #두 개 이상일떄는 리스트
+model.fit([x1_train,x2_train],y1_train,validation_split=0.2,epochs=50,batch_size=8,verbose=1) #두 개 이상일떄는 리스트
 
 
 # 4.평가
 # 출력값이 여러개
-loss,mse=model.evaluate([x1_test,x2_test],y1_test,batch_size=5) 
+loss,mse=model.evaluate([x1_test,x2_test],y1_test,batch_size=8) 
 print("loss:",loss)
 # print("mse:",mse)
 
@@ -121,3 +121,5 @@ print("R2_1:",r2_1)
 # print("R2_3:",r2_3)
 # print("R2:",(r2_1+r2_2+r2_3)/3)
 #즉, RMSE는 낮게 R2는 높게
+
+#과적합을 해결하는 거-early stopping
