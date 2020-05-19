@@ -70,7 +70,7 @@ from sklearn.metrics import mean_squared_error as mse
 
 #함수는 재사용
 #y_test가 원래 값 mse=시그마(y-yhat)^2/n
-#y_predict는 x_test로 예측
+#y_predict는 x_test로 예측한다.
 
 def RMSE(y_test,y_predict):
     return np.sqrt(mse(y_test,y_predict))
