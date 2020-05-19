@@ -19,7 +19,7 @@ y2=np.transpose(y2)
 y3=np.transpose(y3)
 
 from sklearn.model_selection import train_test_split
-x1_train,x1_test,y1_train,y1_test,x2_train,x2_test,y2_train,y2_test,y3_train,y3_test=train_test_split(x1,y1,x2,y2,y3,shuffle=False,test_size=0.2) #한 번에 해도 잘 나오는 것이 확인됨
+x1_train,x1_test,y1_train,y1_test,x2_train,x2_test,y2_train,y2_test,y3_train,y3_test=train_test_split(x1,y1,x2,y2,y3,random_state=60,test_size=0.2) #한 번에 해도 잘 나오는 것이 확인됨
 print("x1_train_len:",len(x1_train)) #개수 80
 print("x2_test_len:",len(x2_test)) #개수 20
 print("y3_train_len:",len(y3_train)) #개수 80
@@ -37,7 +37,7 @@ from keras.layers import Dense, Input #inputlayer명시
 
 
 #첫번째 모델(1)
-input1=Input(shape=(2,)) # 변수명은 소문자(암묵적약속)
+input1=Input(shape=(2,)) #행은 무시 열 우선
 dense1_1=Dense(30,activation='relu',name='A1')(input1) #input명시해주어야 함
 dense1_2=Dense(4,activation='relu',name='A2')(dense1_1)
 dense1_3=Dense(5,activation='relu',name='A3')(dense1_2)
