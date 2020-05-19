@@ -12,6 +12,9 @@ x1=np.transpose(x1)
 y1=np.transpose(y1)
 y2=np.transpose(y2)
 
+print(x1.shape)
+print(y1.shape)
+
 
 from sklearn.model_selection import train_test_split
 x1_train,x1_test,y1_train,y1_test,y2_train,y2_test=train_test_split(x1,y1,y2,random_state=60,test_size=0.2) #한번에 분리 가능하다. 
@@ -21,6 +24,9 @@ x1_train,x1_test,y1_train,y1_test,y2_train,y2_test=train_test_split(x1,y1,y2,ran
 # print("y1_test:",y1_test)
 # print("y2_train:",y2_train)
 # print("y2_test:",y2_test)
+print(x1_train.shape) #(80 , 2)
+print(y1_test.shape)  #(20 , 2)
+
 
 #2. 모델구성 함수형으로 바꿈
 # 함수형은 서로 다른 모델들을 엮을 수 있다-앙상블
@@ -45,25 +51,27 @@ dense1_4=Dense(227,activation='relu',name='A4')(dense1_3)
 dense1_4=Dense(300,activation='relu',name='A4')(dense1_3)
 
 #인풋 변수가 하나이기 떄문에 merge쓸 수 없다. 
+# from keras.layes.merge import concatenate
+# merge1=concatenate([dense1_4,dense2_4])
 
-# 또 레이어 연결(3)
-middle1=Dense(3000,name='m1')(dense1_4)
-middle1=Dense(500,name='m2')(middle1)
-middle1=Dense(700,name='m3')(middle1)
+# 또 레이어 연결(3)--->middle도 없어도 된다. 
+# middle1=Dense(3000,name='m1')(dense1_4)
+# middle1=Dense(500,name='m2')(middle1)
+# middle1=Dense(700,name='m3')(middle1)
 
 # 엮은 거 다시 풀어준다(output도 3개 나와야하니까) ---분리(4)
 # input=middle1(상단 레이어의 이름)
-output1=Dense(100,name='o1')(middle1)
+output1=Dense(100,name='o1')(dense1_4)
 output1_2=Dense(700,name='o1_2')(output1)
 output1_3=Dense(250,name='o1_3')(output1_2) 
 output1_4=Dense(250,name='o1_4')(output1_3) 
 output1_5=Dense(2,name='o1_5')(output1_4) #마지막 아웃풋 2(shape(100,2)이므로)(100,2)짜리가 2개
 
-output2=Dense(100,name='o2')(middle1)
-output2_2=Dense(700,name='o2_2')(output1)
-output2_3=Dense(250,name='o2_3')(output1_2) 
-output2_4=Dense(250,name='o2_4')(output1_3) 
-output2_5=Dense(2,name='o2_5')(output1_4) 
+output2=Dense(100,name='o2')(dense1_4)
+output2_2=Dense(700,name='o2_2')(output2)
+output2_3=Dense(250,name='o2_3')(output2_2) 
+output2_4=Dense(250,name='o2_4')(output2_3) 
+output2_5=Dense(2,name='o2_5')(output2_4) 
 
 #함수형 지정(제일 하단에 명시함)
 model=Model(input=input1, outputs=[output1_5,output2_5]) # 범위 명시 #함수형은 마지막에 선언 #두 개 이상은 리스트
@@ -73,12 +81,13 @@ model.summary()
 
 ##batch_size같이 맞춰주는 게 좋음
 #3.훈련-기계
-model.compile(loss='mse',optimizer='adam',metrics=['mse']) 
-model.fit(x1_train,[y1_train,y2_train],validation_split=0.2,epochs=100,batch_size=8,verbose=1) #두 개 이상일떄는 리스트
+model.compile(loss='mse',optimizer='adam', metrics=['mse']) 
+model.fit(x1_train,[y1_train,y2_train],validation_split=0.2,epochs=200,batch_size=8,verbose=1) #두 개 이상일떄는 리스트
 
 
 # 4.평가
 # 출력값이 여러개
+# evaluate 에 batch_size값 명시 안된 경우 많다. defalult값은 16
 loss,o1_5_loss,o2_5_loss,o1_5_mse,o2_5_mse=model.evaluate(x1_test,[y1_test,y2_test],batch_size=5) 
 print("loss:",loss)
 # print("mse:",mse)
@@ -116,5 +125,5 @@ print("R2:",(r2_1+r2_2)/2)
 print("R2_1:",r2_1)
 print("R2_2:",r2_2)
 # print("R2_3:",r2_3)
-# print("R2:",(r2_1+r2_2+r2_3)/3)
 #즉, RMSE는 낮게 R2는 높게
+
