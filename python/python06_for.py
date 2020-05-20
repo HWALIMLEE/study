@@ -71,7 +71,7 @@ score=[90,25,67,45,80]
 number=0
 for i in score:
     if i<30:
-        break; #break당하면 제일 가까운 for문 중단시킴 #90만 나오게 된다.
+        break #break당하면 제일 가까운 for문 중단시킴 #90만 나오게 된다.
     if i>=60:
         print("경축")
         number=number+1
@@ -82,7 +82,7 @@ score=[90,25,67,45,80]
 number=0
 for i in score:
     if i<60:
-        continue; #continue 문 걸리면 for문 다시 위로 올라감 밑에꺼 실행 안됨
+       continue #continue 문 걸리면 for문 다시 위로 올라감 밑에꺼 실행 안됨
     if i>=60:
         print("경축")
         number=number+1
