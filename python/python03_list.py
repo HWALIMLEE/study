@@ -26,6 +26,7 @@ b=[4,5,6]
 print(a+b) #[1,2,3,4,5,6] 가중치 연산(행렬 연산)
 
 #numpy.array는 a+b=[5,7,9] 사람이 하는 연산처럼 해줌/ numpy 속도 매우 빠름/ 같은 타입만 쓸 수 있다. 
+#numpy쓸 때 list 제일 중요
 # import numpy as np
 # a=np.array([1,2,3])
 # b=np.array([4,5,6])
