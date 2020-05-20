@@ -1,0 +1,30 @@
+DNN-Dense Neural Network
+CNN-합성곱(이미지 분석에서 사용)--->이미지 잘게 잘라서
+RNN-순환신경망--->연속된 데이터 
+-가장 대표적인 것: LSTM(Long Short Term Memory)
+머신러닝이 딥러닝보다 훨씬 속도가 빠르다.
+머신러닝 먼저 돌리고 딥러닝 돌리기
+머신러닝에서 나온 값을 뛰어넘는 딥러닝 값 찾기
+
+Simple RNN-그냥 RNN
+GRU-
+LSTM-제일 많이 쓴다(성능 best) --->연산이 제일 많다(시간 오래 걸린다.)
+
+model.add(LSTM())-Dense대신 LSTM넣으면 된다. 
+model.add(Dense())
+
+
+RNN-RNN은 스스로를 반복하면서 이전 단계에서 얻은 정보가 지속되도록 한다.
+하지만 반대로 더 많은 문맥을 필요로 하는 경우도 있다. "I grew up in France... I speak fluent French"라는 문단의 마지막 단어를 맞추고 싶다고 생각해보자. 최근 몇몇 단어를 봤을 때 아마도 언어에 대한 단어가 와야 될 것이라 생각할 수는 있지만, 어떤 나라 언어인지 알기 위해서는 프랑스에 대한 문맥을 훨씬 뒤에서 찾아봐야 한다. 이렇게 되면 필요한 정보를 얻기 위한 시간 격차는 굉장히 커지게 된다.
+
+안타깝게도 이 격차가 늘어날 수록 RNN은 학습하는 정보를 계속 이어나가기 힘들어한다.
+이론적으로는 RNN이 이러한 "긴 기간의 의존성(long-term dependencies)"를 완벽하게 다룰 수 있다고 한다. 그리고 단순한 예제에 대해서는 사람이 신중하게 parameter를 골라서 그 문제를 해결할 수도 있다. 하지만 RNN은 실제 문제를 해결하지 못 하는 것이 슬픈 현실이다. 이 사안에 대해 Hochreiter (1991)과 Bengio 외 (1994)가 심도있게 논의했는데, RNN이 긴 의존 기간의 문제를 어려워하는 꽤나 핵심적인 이유들을 찾아냈다.
+
+고맙게도 LSTM은 문제 없다!
+
+
+
+출처: https://dgkim5360.tistory.com/entry/understanding-long-short-term-memory-lstm-kr [개발새발로그]
+
+***처음만 LSTM
+    다음부터는 Dense
