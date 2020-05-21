@@ -54,7 +54,7 @@ model.add(Dense(3))
 
 #3.훈련-기계
 model.compile(loss='mse',optimizer='adam',metrics=['mse']) 
-model.fit(x_train, y_train, validation_split=0.2,epochs=100, batch_size=1)
+model.fit(x_train, y_train, validation_split=0.2,epochs=100, batch_size=1) #한행씩 자르겠다. 
 # print("x_train:",x_train)
 # print("x_test:",x_test)
 # print("x_train_len:",len(x_train))
