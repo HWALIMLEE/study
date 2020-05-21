@@ -6,7 +6,7 @@ import numpy as np
 #시작지점은 1, 뒤에서 -1빼기 range여러개 나열하면 오류가 나옴--->리스트로 만들면 된다. 
 #3행 100열로 나오게 된다. >>>100행 3열로 바꿔야 함
 #바꾸려면....?
-x=np.array([range(1,101),range(311,411),range(100)]) #--->x=np.transpose(x)로 바꾸자
+x=np.array([range(1,101),range(311,411),range(100)]) #--->x=np.transpose(x)로 바꾸자!
 y=np.array(range(711,811))
 #리스트-다 모아져 있는 것, [ ]쓰지 않으면 출력이 안 된다. 
 x=np.transpose(x)
