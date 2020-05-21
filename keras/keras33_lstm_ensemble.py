@@ -71,7 +71,7 @@ x2_predict=x2_predict.reshape(1,3,1)
 # print(x1.shape)
 # print(x2.shape)
 
-y_predict=model.predict([x1_predict,x2_predict])
+y_predict=model.predict([x1_predict,x2_predict]) #처음 모델이 x 2개를 넣어서 y하나 예측하는 것이었음 따라서 predict도 동일하게!
 
  #대괄호 써주어야 함 리스트로 만들기
 print("y_predict:",y_predict)
