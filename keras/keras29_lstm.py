@@ -23,18 +23,16 @@ print("x:",x.shape)
 print("x:",x)
 
 #2. 모델구성
+# LSTM은 DENSE모델에 비해 많은 연산을 하게 된다. 
 model=Sequential()
 model.add(LSTM(10,activation='relu',input_shape=(3,1))) #시계열 input_shape=(3,1) ***행 무시***, LSTM에서 중요한 것: 컬럼의 개수와 몇개씩 잘라서 계산할 것이냐, 행은 중요하지 않다
 #여기서부터는 Dense모델
 model.add(Dense(5))
 model.add(Dense(15))
 model.add(Dense(15))
-model.add(Dense(100))
 model.add(Dense(15))
+model.add(Dense(50))
 model.add(Dense(15))
-model.add(Dense(100))
-model.add(Dense(100))
-model.add(Dense(100))
 model.add(Dense(15))
 model.add(Dense(1)) #하나 예측 y=[4,5,6,7]
 
@@ -43,7 +41,7 @@ model.summary() #param[1]=480
 #과제1
 #param 이 왜 480나오는 지 찾아보기
 #input_shape는 (3,1)밖에 안들어갔는데 왜 480이 나올까
-
+"""
 #3. 실행
 model.compile(optimizer='adam',loss='mse') #metrics하나 안하나 상관없다.
 model.fit(x,y,epochs=100,batch_size=1)
@@ -72,4 +70,3 @@ print(yhat)
 # print(k.shape)
 ###스칼라    벡터    행렬     텐서
 
-"""
