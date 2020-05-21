@@ -44,7 +44,7 @@ model.summary() #param[1]=480
 """
 #3. 실행
 model.compile(optimizer='adam',loss='mse') #metrics하나 안하나 상관없다.
-model.fit(x,y,epochs=100,batch_size=1)
+model.fit(x,y,epochs=300,batch_size=1)
 
 x_input=array([5,6,7]) #(3,) 와꾸가 안맞음--->(1,3,1)로 변환 (행, 열, 몇개로 쪼갤건지)
 x_input=x_input.reshape(1,3,1)
