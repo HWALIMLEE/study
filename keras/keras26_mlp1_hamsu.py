@@ -1,9 +1,6 @@
+#keras14_mlp를 sequential에서 함수형으로 변경
 #1. 데이터(x, y값 준비)
 import numpy as np
-
-#시작지점은 1, 뒤에서 -1빼기 range여러개 나열하면 오류가 나옴--->리스트로 만들면 된다. 
-#3행 100열로 나오게 된다. >>>100행 3열로 바꿔야 함
-#바꾸려면....?
 x=np.array([range(1,101),range(311,411),range(100)]) #--->x=np.transpose(x)로 바꾸자
 y=np.array([range(101,201),range(711,811),range(100)])
 #리스트-다 모아져 있는 것, [ ]쓰지 않으면 출력이 안 된다. 
@@ -11,50 +8,40 @@ y=np.array([range(101,201),range(711,811),range(100)])
 x=np.transpose(x)
 y=np.transpose(y)
 
-
 # print(x)
 # print(x.shape)
 # print(y.shape)
 # print(y)
 
 from sklearn.model_selection import train_test_split
-x_train,x_test,y_train,y_test=train_test_split(x,y,random_state=60,train_size=0.5,test_size=0.2)#column채로 잘리게 된다. train=(80,3) test=(20,3) 행의 숫자에 맞춰서 잘림
-x_val, x_test, y_val, y_test=train_test_split(x_test,y_test, shuffle=False, test_size=0.5) 
+x_train,x_test,y_train,y_test=train_test_split(x,y,random_state=60,train_size=0.8)
 # print("x_train:",x_train)
 # print("x_test:",x_test)
-# print("x_val:",x_val)
-
-#train_size와 test_size합이 1이 넘어가면 오류가 생김(train_size=1-test_size)
-#train_size와 test_size합이 1이 안된다면 어떻게 될까?
-#>>비율 정한만큼만 나와서 돌아간다. 
-#shuffle은 random_state에 우선한다. 즉, shuffle=False를 하게 되면 random_state에 값을 넣어도 섞이지 않는다. 
-
-
-# x_train=x[:60] #index의 0은 여기서 1, 60-1=59번째 인덱스=60 #column이 하나이기 때문에 input_dim=1
-# x_val=x[60:80] #index의 60은 61, 80-1=79번째 인덱스=80
-# x_test=x[80:] #index의 80은 81
-
-# y_train=x[:60]
-# y_val=x[60:80]
-# y_test=x[80:]
 
 
 #2. 모델구성 #transfer learning
-from keras.models import Sequential
-from keras.layers import Dense
+from keras.models import Sequential,Model
+from keras.layers import Dense, Input
 
-model=Sequential()
+input1=Input(shape=(3,))
+dense1_1=Dense(10,name='A1')(input1)
+dense1_2=Dense(5,name='A2')(dense1_1)
+dense1_3=Dense(8,name='A3')(dense1_2)
 
-model.add(Dense(50,input_dim=3)) #x,y한덩어리(input_dim=1)
-model.add(Dense(5))
-model.add(Dense(10))
-model.add(Dense(5))
-model.add(Dense(5))
-model.add(Dense(3))
+output1=Dense(40,name='o1')(dense1_3)
+output1_2=Dense(30,name='o2')(output1)
+output1_3=Dense(50,name='o3')(output1_2)
+output1_4=Dense(3,name='o4')(output1_3)
+
+model=Model(input=input1,output=output1_4)
+model.summary()
 
 #3.훈련-기계
 model.compile(loss='mse',optimizer='adam',metrics=['mse']) 
-model.fit(x_train, y_train, validation_split=0.2,epochs=100, batch_size=1) #한행씩 자르겠다. 
+from keras.callbacks import EarlyStopping
+
+early_stopping=EarlyStopping(monitor='loss',patience=5,mode='auto')
+model.fit(x_train, y_train, validation_split=0.2,epochs=100, batch_size=1,callbacks=[early_stopping])
 # print("x_train:",x_train)
 # print("x_test:",x_test)
 # print("x_train_len:",len(x_train))
@@ -84,7 +71,7 @@ from sklearn.metrics import mean_squared_error as mse
 
 #함수는 재사용
 #y_test가 원래 값 mse=시그마(y-yhat)^2/n
-#y_predict는 x_test로 예측
+#y_predict는 x_test로 예측한다.
 
 def RMSE(y_test,y_predict):
     return np.sqrt(mse(y_test,y_predict))
