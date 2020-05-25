@@ -22,9 +22,9 @@ x_predict=x_predict.reshape(1,3) #reshape먼저 해주어야 함
 # x=scaler.transform(x) 
 # print(x)
 
-scalar=StandardScaler()
-scalar.fit(x)
-x=scalar.transform(x)
+scaler=StandardScaler()
+scaler.fit(x)
+x=scaler.transform(x)
 # print(x)
 # print(np.mean(x))
 # print(np.std(x))
@@ -32,7 +32,7 @@ print("x.shape:",x.shape)
 x=x.reshape(x.shape[0],x.shape[1],1) 
 print("x:",x.shape)
 # scaler.fit(x_predict)--->쓰는 것 아님, 이미 x에 훈련시켜준 것(주의!!)
-x_predict=scalar.transform(x_predict)
+x_predict=scaler.transform(x_predict)
 print(x_predict)
 
 
