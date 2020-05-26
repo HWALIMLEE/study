@@ -19,7 +19,7 @@ model.add(Dense(10)) #output 을 바꿈 keras45파일에서 오류난다.
 model.summary() 
 
 
-#model만 summary되서 나온다. 
+# model만 summary되서 나온다. 
 # 저장(model만)
 # 쓸만한 모델만 저장할 수 있다. 
 
