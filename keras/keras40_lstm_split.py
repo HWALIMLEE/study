@@ -62,8 +62,8 @@ early_stopping=EarlyStopping(monitor='loss',patience=100, mode='auto')
 model.fit(x,y,epochs=10000,batch_size=1,callbacks=[early_stopping])
 
 #4. 평가, 예측
-loss,acc=model.evaluate(x,y,batch_size=1) #metrics 꼭 써주어야 함
+loss,mse=model.evaluate(x,y,batch_size=1) #metrics 꼭 써주어야 함
 print("loss:",loss)
-print("acc:",acc)
+print("acc:",mse)
 y_predict=model.predict(x)
 print("y_predict:",y_predict)
