@@ -75,9 +75,9 @@ early_stopping=EarlyStopping(monitor='loss',patience=10, mode='auto')
 #patience는 epoch보다 작아야 한다. 
 model.fit(x_train,y_train,epochs=1000,batch_size=1,callbacks=[early_stopping],validation_split=0.2,shuffle=True)
 # 4. 평가, 예측
-loss,acc=model.evaluate(x_test,y_test,batch_size=1) #metrics 꼭 써주어야 함
+loss,mse=model.evaluate(x_test,y_test,batch_size=1) #metrics 꼭 써주어야 함
 print("loss:",loss)
-print("acc:",acc)
+print("acc:",mse)
 
 y_predict=model.predict(x_predict)
 print("y_predict:",y_predict)
