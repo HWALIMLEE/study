@@ -36,21 +36,21 @@ print(x.shape)
 
 # LSTM 모델을 완성하시오.
 
-#2. 모델 불러오기 /전이학습
+#2. 모델 불러오기 /전이학습(transfer learning)
 from keras.models import load_model
 
 model=load_model(".//model//save_keras_44.h5") #load_model로 load된 애 불러오기
 
 model.add(Dense(1,name='new1'))
-model.add(Dense(10,name='new2'))
+model.add(Dense(10,name='new2')) 
 model.add(Dense(30,name='new3'))
 model.add(Dense(1,name='new4'))
 
 
 model.summary()
 
-#name을 추가해주어야 충돌되지 않고 진행이 된다. 
-#name을 쓰니 error가 잡히는 이유
+# load할 때 name을 추가해주어야 충돌되지 않고 진행이 된다. 
+# name을 쓰니 error가 잡히는 이유
 
 
 
@@ -64,8 +64,8 @@ early_stopping=EarlyStopping(monitor='loss',patience=100, mode='auto')
 model.fit(x,y,epochs=10000,batch_size=1,callbacks=[early_stopping])
 
 #4. 평가, 예측
-loss,acc=model.evaluate(x,y,batch_size=1) #metrics 꼭 써주어야 함
+loss,mse=model.evaluate(x,y,batch_size=1) #metrics 꼭 써주어야 함
 print("loss:",loss)
-print("acc:",acc)
+print("acc:",mse)
 y_predict=model.predict(x)
 print("y_predict:",y_predict)
