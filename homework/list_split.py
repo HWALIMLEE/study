@@ -25,3 +25,7 @@ answer=re.split("[, .]",test_sentence)
 print(answer)
 #re.split()함수의 사용법
 #re.split("[구분기호]", 분할할 문자열)
+time_data="2020/1/5_22:15"
+time_list=re.split("[/_:]",time_data)
+print(time_list[1])
+print(time_list[3])
