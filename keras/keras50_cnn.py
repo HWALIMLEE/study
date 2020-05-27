@@ -12,7 +12,7 @@ model.add(Conv2D(10,(2,2),input_shape=(10,10,1))) #(9,9,10) # input_shape(,,1)-�
 # input_shape는 그림이 들어간다. 가로x세로x명암
 # 자른 걸 또 자른다. 
 
-model.add(Conv2D(7,(2,2))) #(7,7,7) #input_shape명시 안해줘도 됨/ 또 특성을 찾기
+model.add(Conv2D(7,(3,3))) #(7,7,7) #input_shape명시 안해줘도 됨/ 또 특성을 찾기
 model.add(Conv2D(5,(2,2),padding="same")) #(7,7,5)
 model.add(Conv2D(5,(2,2))) #(6,6,5)
 # model.add(Conv2D(5,(2,2),strides=2)) #(3,3,5)
