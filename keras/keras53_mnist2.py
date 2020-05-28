@@ -71,6 +71,8 @@ model.add(MaxPooling2D(pool_size=2))
 
 model.add(Flatten())
 model.add(Dense(10,activation='softmax')) # 마지막 dense모델에 다중분류는 activation='softmax'가 들어가야 한다. 위에 conv2D에 들어가는 것 아님
+# 왜 마지막에 나가는게 10이었지?
+# OneHotEncoding 써서 그렇다
 
 model.summary()
 
