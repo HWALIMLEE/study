@@ -82,7 +82,7 @@ model.summary()
 
 
 # 3. 훈련
-model.compile(optimizer='adam',loss='binary_crossentropy',metrics=['acc'])
+model.compile(optimizer='adam',loss='categorical_crossentropy',metrics=['acc'])
 
 # model.compile(optimizer='adam',loss='categorical_crossentropy',metrics=['acc'])
 # 분류 모델에서는 accuracy
@@ -102,3 +102,5 @@ print("y_predict.shape:",y_predict.shape)
 print("y_predict:",y_predict)
 
 print(np.argmax(y_predict,axis=1))
+
+# 최종값: 0.988
