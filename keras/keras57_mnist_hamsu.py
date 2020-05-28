@@ -53,25 +53,6 @@ output5=Dense(10,activation="softmax")(output4)
 model=Model(input=input1,output=output5)
 
 model.summary()
-#<Dnn>
-# model.add(Conv2D(10,(2,2),input_shape=(28,28,1)))
-# model.add(Conv2D(20,(2,2),padding="same",activation='relu'))
-# model.add(Dropout(0.2)) #이 레이어에 있는 노드의 20%제거(아무데나 써주고 싶은 데 써도 된다.)
-# model.add(Conv2D(30,(2,2),padding="same",activation='relu'))
-# model.add(Conv2D(30,(2,2),padding="same",activation='relu'))
-# model.add(Dropout(0.2))
-# model.add(Conv2D(20,(2,2),padding="same",activation='relu'))
-# model.add(Dropout(0.3))
-# model.add(Conv2D(30,(2,2),padding="same",activation='relu'))
-# model.add(Conv2D(50,(2,2),padding="same",activation='relu'))
-
-# model.add(MaxPooling2D(pool_size=2))
-
-
-# model.add(Flatten())
-# model.add(Dense(10,activation='softmax')) # 마지막 dense모델에 다중분류는 activation='softmax'가 들어가야 한다. 위에 conv2D에 들어가는 것 아님
-
-model.summary()
 
 
 # 3. 훈련
