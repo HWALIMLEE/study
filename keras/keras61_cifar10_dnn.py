@@ -3,6 +3,7 @@ from keras.models import Model, Input
 from keras.layers import Dense
 from keras.utils import np_utils
 from keras.datasets import cifar10
+import matplotlib.pyplot as plt
 
 (x_train,y_train),(x_test,y_test)=cifar10.load_data()
 
@@ -28,7 +29,10 @@ model=Model(input=input1, output=output3)
 model.summary()
 
 model.compile(loss='categorical_crossentropy',optimizer='adam',metrics=['acc'])
-model.fit(x_train,y_train,epochs=20,batch_size=100)
+hist=model.fit(x_train,y_train,epochs=20,batch_size=100,validations_split=0.2)
+
+
+
 
 loss,acc=model.evaluate(x_test,y_test,batch_size=100)
 
