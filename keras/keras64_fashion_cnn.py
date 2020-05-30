@@ -45,3 +45,9 @@ loss,acc=model.evaluate(x_test,y_test,batch_size=100)
 y_predict=model.predict(x_test)
 
 print("y_predict:",np.argmax(y_predict,axis=1))
+
+"""
+loss: 0.04
+acc: 0.987
+"""
+ 
