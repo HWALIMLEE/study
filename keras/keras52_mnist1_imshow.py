@@ -13,7 +13,7 @@ print("y_test.shape:",y_test.shape)
 #0부터 255까지의 숫자
 #0은 하얀색, 255는 검은색
 
-plt.imshow(x_train[0],'gray') #흑백이면 gray #default값은 컬러
+plt.imshow(x_train[0],'gray') #흑백이면 gray 
 plt.show()
 
 print(x_train[0].shape) #28x28 사이즈만 출력
