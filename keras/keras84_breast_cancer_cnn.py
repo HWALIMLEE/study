@@ -57,12 +57,14 @@ model.add(Dense(2,activation='sigmoid'))
 
 model.summary()
 
-model.compile(loss='binary_crossentropy',optimizer='adam',metrics=['mse'])
+model.compile(loss='binary_crossentropy',optimizer='adam',metrics=['acc'])
 from keras.callbacks import EarlyStopping
 early_stopping=EarlyStopping(monitor='loss',patience=10,mode='aut')
-model.fit(x_train,y_train,epochs=10,batch_size=1)
+model.fit(x_train,y_train,epochs=10,batch_size=1,callbacks=[early_stopping])
 
-loss_acc=model.evaluate(x_test,y_test,batch_size=1)
+loss,acc=model.evaluate(x_test,y_test,batch_size=1)
+print("loss:",loss)
+print("acc:",acc)
 
 y_predict=model.predict(x_test)
 print("y_predict:",y_predict)
@@ -80,3 +82,8 @@ print("RMSE:",RMSE(y_test,y_predict))
 from sklearn.metrics import r2_score
 r2=r2_score(y_test,y_predict)
 print("R2:",r2)
+
+"""
+loss: 0.08
+acc: 0.97
+"""
