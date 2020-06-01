@@ -25,7 +25,7 @@ print("y.shape:",y.shape)
 
 x=StandardScaler().fit_transform(x)
 
-pca=PCA(n_components=6) #주성분 개수
+pca=PCA(n_components=8) #주성분 개수
 trans_x=pca.fit_transform(x)
 
 print("trans_x:",trans_x)
@@ -36,8 +36,8 @@ x_train,x_test,y_train,y_test=train_test_split(trans_x,y,train_size=0.8)
 print("x_train:",x_train)
 print("x_test:",x_test)
 
-x_train=x_train.reshape(353,6)
-x_test=x_test.reshape(89,6)
+x_train=x_train.reshape(353,8)
+x_test=x_test.reshape(89,8)
 # y_train=np_utils.to_categorical(y_train)
 # y_test=np_utils.to_categorical(y_test)
 
@@ -51,13 +51,13 @@ print("y_train:",y_train)
 
 
 model=Sequential()
-model.add(Dense(10,input_shape=(6,),activation='relu'))
-model.add(Dense(30,activation='relu'))
-model.add(Dense(30,activation='relu'))
-model.add(Dense(30,activation='relu'))
-model.add(Dense(20,activation='relu'))
-model.add(Dense(20,activation='relu'))
-model.add(Dense(30,activation='relu'))
+model.add(Dense(32,input_shape=(8,),activation='relu'))
+model.add(Dense(64,activation='relu'))
+model.add(Dense(128,activation='relu'))
+model.add(Dense(256,activation='relu'))
+model.add(Dense(512,activation='relu'))
+model.add(Dense(256,activation='relu'))
+model.add(Dense(128,activation='relu'))
 model.add(Dense(1,activation='relu'))
 
 model.summary()
@@ -65,11 +65,11 @@ model.summary()
 model.compile(loss='mse',optimizer='adam',metrics=['mse'])
 from keras.callbacks import EarlyStopping
 early_stopping=EarlyStopping(monitor='loss',patience=10,mode='aut')
-model.fit(x_train,y_train,epochs=100,batch_size=1,callbacks=[early_stopping])
+model.fit(x_train,y_train,epochs=10,batch_size=1,callbacks=[early_stopping])
 
-loss,acc=model.evaluate(x_test,y_test,batch_size=1)
+loss,mse=model.evaluate(x_test,y_test,batch_size=1)
 print("loss:",loss)
-print("acc:",acc)
+print("mse:",mse)
 
 y_predict=model.predict(x_test)
 
@@ -88,6 +88,7 @@ r2=r2_score(y_test,y_predict)
 print("R2:",r2)
 
 """
-loss: 5852.006
-acc: 5852.005
+loss: 4268.2046
+r2:0.153
+ 
 """
