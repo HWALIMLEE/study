@@ -32,7 +32,7 @@ print("trans_x:",trans_x)
 print("trans_x.shape:",trans_x.shape)
 
 
-x_train,x_test,y_train,y_test=train_test_split(trans_x,y,train_size=0.8)
+x_train,x_test,y_train,y_test=train_test_split(trans_x,y,train_size=0.8,shuffle = True, random_state=30)
 print("x_train:",x_train)
 print("x_test:",x_test)
 
@@ -57,18 +57,18 @@ model.add(Conv2D(10,(2,2),activation='relu',padding="same"))
 model.add(MaxPooling2D(pool_size=2))
 model.add(Conv2D(15,(1,1),activation='relu',padding="same"))
 model.add(Flatten())
-model.add(Dense(1,activation='sigmoid'))
+model.add(Dense(1,activation='relu'))
 
 model.summary()
 
 model.compile(loss='mse',optimizer='adam',metrics=['mse'])
 from keras.callbacks import EarlyStopping
-early_stopping=EarlyStopping(monitor='loss',patience=10,mode='aut')
-model.fit(x_train,y_train,epochs=100,batch_size=1,callbacks=[early_stopping])
+early_stopping=EarlyStopping(monitor='loss',patience=10,mode='auto')
+model.fit(x_train,y_train,epochs=100,batch_size=1,callbacks=[early_stopping],validation_split=0.1)
 
-loss,acc=model.evaluate(x_test,y_test,batch_size=1)
+loss,mse=model.evaluate(x_test,y_test,batch_size=1)
 print("loss:",loss)
-print("acc:",acc)
+print("mse:",mse)
 
 y_predict=model.predict(x_test)
 
@@ -88,5 +88,5 @@ print("R2:",r2)
 
 """
 loss: 28068.472
-acc: 28068.473
+R2: 0.46
 """
