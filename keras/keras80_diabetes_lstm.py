@@ -53,7 +53,7 @@ model.add(LSTM(10,input_shape=(2,3),activation='relu'))
 model.add(Dense(20,activation='relu'))
 model.add(Dense(10,activation='relu'))
 model.add(Dense(15,activation='relu'))
-model.add(Dense(1,activation='sigmoid'))
+model.add(Dense(1,activation='relu'))
 
 model.summary()
 
@@ -62,9 +62,9 @@ from keras.callbacks import EarlyStopping
 early_stopping=EarlyStopping(monitor='loss',patience=10,mode='aut')
 model.fit(x_train,y_train,epochs=100,batch_size=1,callbacks=[early_stopping])
 
-loss,acc=model.evaluate(x_test,y_test,batch_size=1)
+loss,mse=model.evaluate(x_test,y_test,batch_size=1)
 print("loss:",loss)
-print("acc:",acc)
+print("mse:",mse)
 
 y_predict=model.predict(x_test)
 
@@ -86,5 +86,5 @@ print("R2:",r2)
 
 """
 loss: 28937.0224
-acc: 28937.0234
+r2: 0.42
 """
