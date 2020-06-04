@@ -5,6 +5,7 @@ from keras.utils import np_utils
 datasets=np.load('./data/iris.npy')
 
 print(datasets)
+"""
 x=datasets[:150,0:3]
 print(x)
 y=datasets[:150,4]
@@ -43,6 +44,6 @@ result=model.predict(x_test)
 
 print("result:",np.argmax(result,axis=1))
 
-
+"""
 
 
