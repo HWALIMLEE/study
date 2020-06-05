@@ -7,24 +7,23 @@ import random
 
 samsung=pd.read_csv("./data/csv/samsung.csv",index_col=0,header=0,sep=',',encoding='CP949') 
 hite=pd.read_csv("./data/csv/hite.csv",index_col=0,header=0,sep=',',encoding='CP949')
-print(samsung.shape) # (509,1)
-print(hite.shape) # (509,5) 
+print(samsung) # (509,1)
+print(hite) # (509,5) 
 
 for i in range(len(samsung.index)):
     samsung.iloc[i,0]=int(samsung.iloc[i,0].replace(',',''))
 
 #결측치 제거
-hite_drop=hite.dropna(axis=0)
+# hite_drop=hite.dropna(axis=0)
 
 
-for i in range(len(hite_drop.index)):
-    for j in range(len(hite_drop.iloc[i])):
-            if type(hite_drop.iloc[i,j])==str:
-                hite_drop.iloc[i,j]=int(hite_drop.iloc[i,j].replace(',',''))
+for i in range(len(hite.index)):
+    for j in range(len(hite.iloc[i])):
+            if type(hite.iloc[i,j])==str:
+                hite.iloc[i,j]=int(hite.iloc[i,j].replace(',',''))
 
-print(hite_drop.head())
+print(hite.head())
 
-hite=hite_drop
 samsung=samsung.sort_values(['일자'], ascending=True)
 hite=hite.sort_values(['일자'],ascending=True)
 
@@ -35,4 +34,4 @@ samsung=samsung.values
 hite=hite.values
 
 np.save('./data/samsung.npy',arr=samsung)
-np.save('./data/hite.npy',arr=hite_drop)
+np.save('./data/hite.npy',arr=hite)

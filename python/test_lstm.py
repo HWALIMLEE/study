@@ -14,10 +14,10 @@ print("samsung.shape:",samsung.shape)
 # print("hite.shape:",hite.shape)
 
 #hite에 6.2 시가 넣어주기
-hite=hite[0:,0]
-hite=np.append(hite,np.array([39000]),axis=0)
+# hite=hite[0:,0]
+# hite=np.append(hite,np.array([39000]),axis=0)
 print("hite.shape:",hite.shape)
-hite=hite.reshape(509,1)
+hite=hite.reshape(509,5)
 print(hite)
 print("hite.shape:",hite.shape)
 
@@ -54,7 +54,7 @@ def split(dataset,time_steps,y_column):
 
 x,y=split(hite,5,1)
 print("x.shape:",x.shape)
-y=y.reshape(504,1)
+y=y.reshape(504,5)
 print("y.shape:",y.shape)
 
 
@@ -75,8 +75,8 @@ print("x2_test.shape:",x2_test.shape)
 
 
 #reshape-->2차원으로 변경
-x_train=x_train.reshape(403,5)
-x_test=x_test.reshape(101,5)
+x_train=x_train.reshape(403,25)
+x_test=x_test.reshape(101,25)
 x2_train=x2_train.reshape(403,5)
 x2_test=x2_test.reshape(101,5)
 
@@ -99,15 +99,15 @@ print(x2_test_scaled[0,:])
 
 
 #3차원 배열로 변경
-x_train_scaled=x_train_scaled.reshape(403,5,1)
-x_test_scaled=x_test_scaled.reshape(101,5,1)
+x_train_scaled=x_train_scaled.reshape(403,5,5)
+x_test_scaled=x_test_scaled.reshape(101,5,5)
 
 
 x2_train_scaled=x2_train_scaled.reshape(403,5,1)
 x2_test_scaled=x2_test_scaled.reshape(101,5,1)
 
 
-input1=Input(shape=(5,1)) # 변수명은 소문자(암묵적약속)
+input1=Input(shape=(5,5)) # 변수명은 소문자(암묵적약속)
 dense1_1=LSTM(30,activation='relu',name='A1')(input1) #input명시해주어야 함
 dense1_2=Dense(20,activation='relu',name='A2')(dense1_1)
 dense1_3=Dense(20,activation='relu',name='A3')(dense1_2)
@@ -153,7 +153,7 @@ model.summary()
 
 
 #3.훈련-기계
-modelpath='./model/test4-{epoch:02d}-{val_loss:.4f}.hdf5'
+modelpath='./model/test_try-{epoch:02d}-{val_loss:.4f}.hdf5'
 model.compile(loss='mse',optimizer='adam',metrics=['mse']) 
 from keras.callbacks import EarlyStopping,ModelCheckpoint
 early_stopping=EarlyStopping(monitor='loss',patience=10,mode='min')
