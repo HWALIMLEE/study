@@ -40,3 +40,4 @@ print(sklearn.__version__)
 #sklearn버전 낮추면 all_estimators 정상 작동
 
 
+#커밋수정
