@@ -29,7 +29,7 @@ from sklearn.metrics import r2_score
 
 acc=accuracy_score(y_test,y_predict)
 score=model.score(x_test,y_test)
-print("y_preditc:",y_predict)
+print("y_predict:",y_predict)
 print("acc:",acc)                #0.98
 print("score:",score)            #0.98
 
@@ -45,7 +45,7 @@ from sklearn.metrics import r2_score
 acc=accuracy_score(y_test,y_predict)
 score=model.score(x_test,y_test)
 
-print("y_preditc:",y_predict) 
+print("y_predict:",y_predict) 
 print("acc:",acc)                 #0.97
 print("score:",score)             #0.97
 
@@ -61,7 +61,7 @@ from sklearn.metrics import r2_score
 acc=accuracy_score(y_test,y_predict)
 score=model.score(x_test,y_test)
 
-print("y_preditc:",y_predict)
+print("y_predict:",y_predict)
 print("acc:",acc)             #0.95
 print("score:",score)         #0.95
 
@@ -76,7 +76,7 @@ from sklearn.metrics import r2_score
 acc=accuracy_score(y_test,y_predict)
 score=model.score(x_test,y_test)
 
-print("y_preditc:",y_predict)
+print("y_predict:",y_predict)
 print("acc:",acc)             #0.99
 print("score:",score)         #0.99
 
@@ -91,7 +91,7 @@ from sklearn.metrics import r2_score
 r2=r2_score(y_test,y_predict)
 score=model.score(x_test,y_test)
 
-print("y_preditc:",y_predict)
+print("y_predict:",y_predict)
 print("r2:",r2)              #0.87
 print("score:",score)        #0.87
  
@@ -106,7 +106,7 @@ from sklearn.metrics import r2_score
 r2=r2_score(y_test,y_predict)
 score=model.score(x_test,y_test)
 
-print("y_preditc:",y_predict)
+print("y_predict:",y_predict)
 print("r2:",r2)                #0.90
 print("score:",score)          #0.90
 
