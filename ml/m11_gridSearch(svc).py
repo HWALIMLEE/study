@@ -67,3 +67,4 @@ print("최적의 매개변수:",model.best_estimator_)
 """
 
 
+#커밋수정
