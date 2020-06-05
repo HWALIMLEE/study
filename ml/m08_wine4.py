@@ -44,3 +44,4 @@ print("정답률:",acc)
 acc_score=accuracy_score(y_test,y_pred)
 print("acc_score:",acc_score)
 
+#커밋수정
