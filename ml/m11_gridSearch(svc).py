@@ -39,6 +39,7 @@ model=GridSearchCV(SVC(),parameters,cv=kfold) #몇개로 validation할 것인가
 # 완벽하게 train,test,validation분리 됨
 # train에서만 20%뽑아내는 것
 # test는 안 건들여짐
+# cv=cross_validation
 
 #1. 진짜모델
 #2. 파라미터
