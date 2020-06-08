@@ -40,6 +40,7 @@ for (name,algorithm) in allAlgorithms: #name과 algorithm이 반환값
     
     scores=cross_val_score(model,x,y,cv=kfold) 
     #통으로 넣고 kfold=5기 때문에 5개로 자르고, 훈련시켜서 score내주겠다
+    #cv=전체 조각을 얼마로 하겠다(cross_validation)
 
     print(name,"의 정답률=")
     print(scores) 
