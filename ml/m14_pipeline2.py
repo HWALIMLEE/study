@@ -13,6 +13,8 @@ y=iris.target
 
 x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,
                                                     random_state=43)
+print(x_train.shape)
+print(x_test.shape)
 
 # 그리드/랜덤 서치에서 사용할 매개 변수
 # 돌릴때마다 최적 매개변수 값이 바뀐다
