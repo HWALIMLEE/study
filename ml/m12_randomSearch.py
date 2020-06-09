@@ -30,8 +30,6 @@ parameters={
     'min_samples_split':[10,20,30],
     }
 
-
-kfold=KFold(n_splits=5,shuffle=True)
 model=RandomizedSearchCV(RandomForestClassifier(),parameters,cv=kfold,n_jobs=-1) # 가장 좋은 것만 뽑아냄(시간이 훨씬 빠름/ 드롭아웃 생각하기)
 model.fit(x_train,y_train)
 
