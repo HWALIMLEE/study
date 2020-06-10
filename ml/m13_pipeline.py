@@ -15,10 +15,11 @@ x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,
 # model=SVC()
 # svc_model=SVC()--->위와 동일
 
-from sklearn.pipeline import Pipeline 
+from sklearn.pipeline import Pipeline , make_pipeline
 from sklearn.preprocessing import MinMaxScaler, StandardScaler #pipeline의 친구는 전처리
 
-pipe = Pipeline([("scaler",MinMaxScaler()),('svm',SVC())]) 
+pipe = Pipeline([("scaler",MinMaxScaler()),('svm',SVC())])
+pipe = make_pipeline(MinMaxScaler(),SVC()) #이름 따로 명시 안해줌
 # 전처리와 모델 한번에 돌리는 것
 
 pipe.fit(x_train , y_train)
