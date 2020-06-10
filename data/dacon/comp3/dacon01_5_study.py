@@ -6,7 +6,7 @@ import datetime
 import warnings
 import math
 warnings.filterwarnings("ignore")
-from sklearn.model_selection import KFold, train_test_split, StratifiedKFold, RandomizedSearchCV
+from sklearn.model_selection import KFold, train_test_split, StratifiedKFold
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from sklearn.metrics import accuracy_score, f1_score, confusion_matrix
 from keras.models import Sequential
@@ -15,7 +15,6 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.ensemble import RandomForestRegressor
-import warnings
 
 train_features=pd.read_csv("./data/dacon/comp3/train_features.csv",header=0,index_col=0)
 train_target=pd.read_csv("./data/dacon/comp3/train_target.csv",header=0,index_col=0)
@@ -61,34 +60,18 @@ x_train=x_train.reshape(2240,375*4)
 x_test=x_test.reshape(560,375*4)
 test_data=test_data.reshape(700,375*4)
 
-#pipe매개변수 'model'써주기
-parameters={
-    'model__n_estimators':[30,40,50,60],
-    'model__min_samples_leaf':[1,2,4],
-    'model__min_samples_split':[4,6,8],
-    'model__max_depth':[5,10,15]
-    },
 
-warnings.simplefilter(action='ignore', category=FutureWarning)
-kfold=KFold(n_splits=5,shuffle=True)
+pipe = Pipeline([("scaler",MinMaxScaler()),('model',RandomForestRegressor())]) 
 
-pipe = Pipeline([("scaler",StandardScaler()),('model',RandomForestRegressor())]) 
+pipe.fit(x_train , y_train)
 
-# sorted(pipe.get_params().keys())
-
-model=RandomizedSearchCV(pipe,parameters,cv=kfold,n_jobs=-1) 
-
-model.fit(x_train , y_train)
-
-print("최적의 매개변수=",model.best_params_)
-
-y_predict=model.predict(x_test)
+y_predict=pipe.predict(x_test)
 
 from sklearn.metrics import mean_squared_error
 mse=mean_squared_error(y_test,y_predict)
 print("mse:",mse)
 
-result=model.predict(test_data)
+result=pipe.predict(test_data)
 print(y_predict.shape)
 print(y_predict)
 
@@ -96,53 +79,5 @@ a = np.arange(2800,3500)
 #np.arange--수열 만들때
 submission = result
 submission = pd.DataFrame(submission, a)
-submission.to_csv("./data/dacon/comp3/sample_submission1_3.csv", header = ["X","Y","M","V"], index = True, index_label="id" )
+submission.to_csv("./data/dacon/comp3/sample_submission1_2.csv", header = ["X","Y","M","V"], index = True, index_label="id" )
 
-def kaeri_metric(y_test, y_predict):
-    '''
-    y_true: dataframe with true values of X,Y,M,V
-    y_pred: dataframe with pred values of X,Y,M,V
-    
-    return: KAERI metric
-    '''
-    
-    return 0.5 * E1(y_test, y_predict) + 0.5 * E2(y_test, y_predict)
-
-
-### E1과 E2는 아래에 정의됨 ###
-
-def E1(y_test, y_predict):
-    '''
-    y_true: dataframe with true values of X,Y,M,V
-    y_pred: dataframe with pred values of X,Y,M,V
-    
-    return: distance error normalized with 2e+04
-    '''
-    
-    _t, _p = np.array(y_test)[:,:2], np.array(y_predict)[:,:2]
-    
-    return np.mean(np.sum(np.square(_t - _p), axis = 1) / 2e+04)
-
-
-def E2(y_test, y_predict):
-    '''
-    y_true: dataframe with true values of X,Y,M,V
-    y_pred: dataframe with pred values of X,Y,M,V
-    
-    return: sum of mass and velocity's mean squared percentage error
-    '''
-    
-    _t, _p = np.array(y_test)[:,2:], np.array(y_predict)[:,2:]
-    
-    
-    return np.mean(np.sum(np.square((_t - _p) / (_t + 1e-06)), axis = 1))
-
-print(kaeri_metric(y_test, y_predict))
-print(E1(y_test, y_predict))
-print(E2(y_test, y_predict))
-
-
-
-"""
-mse: 116
-"""

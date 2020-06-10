@@ -65,7 +65,6 @@ pipe = Pipeline([("scaler",MinMaxScaler()),('model',RandomForestRegressor())])
 
 pipe.fit(x_train , y_train)
 
-
 y_predict=pipe.predict(x_test)
 
 from sklearn.metrics import mean_squared_error
