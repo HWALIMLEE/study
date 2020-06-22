@@ -6,9 +6,12 @@ from xgboost import XGBClassifier
 # xgboost는 한번씩 꼭 넣기를 추천함
 # 아직까지 우승 모델
 
-cancer=load_breast_cancer()
+cancer = load_breast_cancer()
+x = cancer.data
+y = cancer.target
+
 x_train,x_test,y_train,y_test=train_test_split(
-    cancer.data, cancer.target, train_size=0.9, random_state=42)
+   x,y, train_size=0.9, random_state=42)
 
 model = XGBClassifier()
 
@@ -40,3 +43,5 @@ def plot_feature_importances_cancer(model):
 plt.subplots(figsize=(15,6))
 plot_feature_importances_cancer(model)
 plt.show()
+
+# feature_engineering
