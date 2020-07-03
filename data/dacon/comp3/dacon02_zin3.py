@@ -55,34 +55,31 @@ from keras.callbacks import ModelCheckpoint
 from keras.models import load_model
 import pandas as pd
 
-# X_data = []
-# Y_data = []
 
-X_data = np.loadtxt('./data/dacon/comp3/train_features.csv',skiprows=1,delimiter=',')
-X_data = X_data[:,1:]
-print(X_data.shape)
+x = np.loadtxt('./data/dacon/comp3/train_features.csv',skiprows=1,delimiter=',')
+x = x[:,1:]
+print(x.shape)
+print(x[:5,:])
      
     
-Y_data = np.loadtxt('./data/dacon/comp3/train_target.csv',skiprows=1,delimiter=',')
-Y_data = Y_data[:,1:]
-print(Y_data.shape)
+y = np.loadtxt('./data/dacon/comp3/train_target.csv',skiprows=1,delimiter=',')
+y = y[:,1:]
+print(y.shape)
 
-X_data = X_data.reshape((2800,375,5,1))
-print(X_data.shape)
+x = x.reshape((2800,375,5,1)) #3차원 변경
+print(x.shape)
 
-X_data_test = np.loadtxt('./data/dacon/comp3/test_features.csv',skiprows=1,delimiter=',')
-X_data_test = X_data_test[:,1:]
-X_data_test = X_data_test.reshape((700,375,5,1))
+x_pred = np.loadtxt('./data/dacon/comp3/test_features.csv',skiprows=1,delimiter=',')
+x_pred = x_pred[:,1:]
+x_pred = x_pred.reshape((700,375,5,1)) #3차원 변경
 
-data_id = 2
-
+data_id = 1
 plt.figure(figsize=(8,6))
 
-
-plt.plot(X_data[data_id,:,0,0], label="Sensor #1")
-plt.plot(X_data[data_id,:,1,0], label="Sensor #2")
-plt.plot(X_data[data_id,:,2,0], label="Sensor #3")
-plt.plot(X_data[data_id,:,3,0], label="Sensor #4")
+plt.plot(x[data_id,:,1,0], label="Sensor #1") 
+plt.plot(x[data_id,:,2,0], label="Sensor #2")
+plt.plot(x[data_id,:,3,0], label="Sensor #3")
+plt.plot(x[data_id,:,4,0], label="Sensor #4")
 
 plt.xlabel("Time", labelpad=10, size=20)
 plt.ylabel("Acceleration", labelpad=10, size=20)
@@ -90,15 +87,17 @@ plt.xticks(size=15)
 plt.yticks(size=15)
 plt.xlim(0, 400)
 plt.legend(loc=1)
+plt.show()
 
-# plt.show()
+#1번 파동이 제일 크다. 
+
 
 from sklearn.model_selection import train_test_split
 
 
-X_train, X_test, Y_train, Y_test = train_test_split(X_data, Y_data, test_size=0.0)
+X_train, X_test, Y_train, Y_test = train_test_split(x,y, test_size=0.01)
 # X_train = X_data
-# Y_train = Y_data
+# Y_train = y
 print(X_train.shape)
 
 weight1 = np.array([1,1,0,0])
@@ -123,7 +122,7 @@ def set_model(train_target):  # 0:x,y, 1:m, 2:v
     activation = 'elu'
     padding = 'valid'
     model = Sequential()
-    nf = 19
+    nf = 16
     fs = (3,1)
 
     model.add(Conv2D(nf,fs, padding=padding, activation=activation,input_shape=(375,5,1)))
@@ -155,9 +154,10 @@ def set_model(train_target):  # 0:x,y, 1:m, 2:v
     model.add(Dense(128, activation ='elu'))
     model.add(Dense(64, activation ='elu'))
     model.add(Dense(32, activation ='elu'))
+    model.add(Dense(16, activation ='elu'))
     model.add(Dense(4))
 
-    optimizer = keras.optimizers.Adam()
+    optimizer = keras.optimizers.Adam(learning_rate=0.05)
 
     global weight2
     if train_target == 1: # only for M
@@ -179,7 +179,7 @@ def set_model(train_target):  # 0:x,y, 1:m, 2:v
     return model
 
 def train(model,X,Y):
-    MODEL_SAVE_FOLDER_PATH = './model/'
+    MODEL_SAVE_FOLDER_PATH = './data/dacon/comp3'
     if not os.path.exists(MODEL_SAVE_FOLDER_PATH):
         os.mkdir(MODEL_SAVE_FOLDER_PATH)
 
@@ -188,8 +188,8 @@ def train(model,X,Y):
 
 
     history = model.fit(X, Y,
-                  epochs=100,
-                  batch_size=256,
+                  epochs=150,
+                  batch_size=100,
                   shuffle=True,
                   validation_split=0.2,
                   verbose = 2,
@@ -203,7 +203,7 @@ def train(model,X,Y):
     loss_ax.set_xlabel('epoch')
     loss_ax.set_ylabel('loss')
     loss_ax.legend(loc='upper left')
-    # plt.show()    
+    plt.show()    
     
     return model
 
@@ -244,7 +244,7 @@ def plot_error(type_id,pred,true):
     plt.ylim(-100., 100.)
     plt.xlim(0, pred.shape[0]+1)
 
-    # plt.show()
+    plt.show()
     
     print(np.std(Err_m))
     print(np.max(Err_m))
@@ -260,27 +260,27 @@ def load_best_model(train_target):
     else:
         model = load_model('best_m.hdf5' , custom_objects={'my_loss_E2': my_loss, })
 
-    score = model.evaluate(X_data, Y_data, verbose=0)
+    score = model.evaluate(x,y, verbose=0)
     print('loss:', score)
 
-    pred = model.predict(X_data)
+    pred = model.predict(x)
 
     i=0
 
-    print('정답(original):', Y_data[i])
+    print('정답(original):', y[i])
     print('예측값(original):', pred[i])
 
-    print(E1(pred, Y_data))
-    print(E2(pred, Y_data))
-    # print(E2M(pred, Y_data))
-    # print(E2V(pred, Y_data))    
+    print(E1(pred, y))
+    print(E2(pred, y))
+    # print(E2M(pred, y))
+    # print(E2V(pred, y))    
     
     if train_target ==0:
-        plot_error(4,pred,Y_data)
+        plot_error(4,pred,y)
     elif train_target ==1:
-        plot_error(2,pred,Y_data)
+        plot_error(2,pred,y)
     elif train_target ==2:
-        plot_error(3,pred,Y_data)    
+        plot_error(3,pred,y)    
     
     return model
 
@@ -292,7 +292,7 @@ for train_target in range(3):
     best_model = load_best_model(train_target)
 
    
-    pred_data_test = best_model.predict(X_data_test)
+    pred_data_test = best_model.predict(x_pred)
     
     
     if train_target == 0: # x,y 학습
@@ -305,6 +305,4 @@ for train_target in range(3):
     elif train_target == 2: # v 학습
         submit.iloc[:,4] = pred_data_test[:,3]
 
-submit.to_csv('./data/dacon/comp3/HL_sub1.csv', index = False)
-
-
+submit.to_csv('./data/dacon/comp3/comp3_submit_zin_3.csv', index = False)
