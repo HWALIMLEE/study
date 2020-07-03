@@ -6,7 +6,7 @@
 from keras.datasets import mnist
 from keras.utils import np_utils  #label이 시작하는게 0부터
 from keras.models import Sequential, Model
-from keras.layers import Input, Dropout, Conv2D, MaxPooling2D, Flatten, Dense, LSTM
+from keras.layers import Input, Dropout, Conv2D, MaxPooling2D, Flatten, Dense, LSTM,LeakyReLU
 import numpy as np
 from sklearn.metrics import accuracy_score
 from keras.optimizers import Adam, SGD, RMSprop, Adadelta, Adagrad, Nadam
@@ -42,14 +42,14 @@ print("====================================")
 # 모델 자체를 진짜 함수로 만든다 (앞으로 계속 이렇게 나올것)
 # Dense모델 구성
 # 모델을 여러번 쓸 수 있다
-def build_model(drop=0.1, optimizer=Adam, learning_rate=0.1): # 초기값은 넣어주어야 함, 변수명 넣어줌
+def build_model(drop=0.1, optimizer=Adam, learning_rate=0.1,activation='relu'): # 초기값은 넣어주어야 함, 변수명 넣어줌
     inputs = Input(shape=(28*28,))
-    x = Dense(512,activation='relu', name='hidden1')(inputs)
-    x = Dense(256,activation='relu',name='hidden2')(x)
+    x = Dense(512, activation=activation, name='hidden1')(inputs)
+    x = Dense(256,activation=activation,name='hidden2')(x)
     x = Dropout(drop)(x)
-    x = Dense(128,activation='relu',name='hidden3')(x)
+    x = Dense(128,activation=activation,name='hidden3')(x)
     x = Dropout(drop)(x)
-    outputs = Dense(10,activation='softmax',name='output')(x)
+    outputs = Dense(10,activation="softmax",name='output')(x)
     
     opt = optimizer(lr=learning_rate) # optimizer 와 learning_rate 엮어주기
     model = Model(inputs=inputs, outputs=outputs)
@@ -63,9 +63,10 @@ def create_hyperparameters():
     optimizer = [Adam, SGD, RMSprop, Adadelta, Adagrad, Nadam] #optimizer의 종류
     learning_rate = [0.1,0.05,0.25,0.001]
     dropout = np.linspace(0.1, 0.5, 5) #0.1부터 0.5까지 5등분
+    activation = ['sigmoid','relu','elu','tanh',LeakyReLU()]
     # epoch도 넣을 수 있고, node의 개수, activation도 넣을 수 있다(많이 넣을 수 있다.)
     # activation의 sigmoid와 softmax는 주의할 것
-    return{"batch_size": batches, "optimizer" : optimizer, "drop" : dropout, "learning_rate" : learning_rate}
+    return{"batch_size": batches, "optimizer" : optimizer, "drop" : dropout, "learning_rate" : learning_rate, "activation": activation}
 
 # 5*5*3=75번 돈다
 
