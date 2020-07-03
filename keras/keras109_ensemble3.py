@@ -67,3 +67,5 @@ print("y_pred:",y_pred)
 
 
 # loss_weight를 주어도 딱히 좋아지지 않는다.
+# activation의 default 값은 linear
+
