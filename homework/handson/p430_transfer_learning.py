@@ -20,7 +20,7 @@ y_test_B = y_test
 from keras.models import load_model
 import keras
 model_A = load_model("./model/my_keras_model.h5")
-model_B_on_A = keras.models.Sequential(model_A.layers[:-1])
+model_B_on_A = Sequential(model_A.layers[:-1])
 model_B_on_A.add(Dense(1,activation='sigmoid',name='new_dense'))
 
 model_A_clone = keras.models.clone_model(model_A)
