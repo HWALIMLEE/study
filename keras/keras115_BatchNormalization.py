@@ -5,7 +5,7 @@
 # ---> elu(상계문제x)(음수 제한 걸어놓음)--->selu
 # 계단함수에서 중간손실 막기 위해 sigmoid씀
 
-### BatchNormalizer
+### BatchNormalizer-과적합 방지
 # layer에 있는 거 normalization
 # kernel = layer
 
