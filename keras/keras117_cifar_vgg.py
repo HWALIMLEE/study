@@ -34,6 +34,7 @@ from keras.applications import VGG16, VGG19
 from keras.callbacks import EarlyStopping
 
 # VGG16은 가중치 전달
+# shape 잘 맞춰주기
 vgg16 = VGG16()
 
 vgg16 = VGG16(
