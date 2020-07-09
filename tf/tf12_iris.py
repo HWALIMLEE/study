@@ -16,13 +16,15 @@ print(y_data.shape) #(150,1)
 sess = tf.Session()
 # # 원핫인코딩
 aaa = tf.one_hot(y_data,depth=3).eval(session=sess)
-# print(aaa)
+print(aaa.shape) #(150,1,3)
+aaa = aaa.reshape(150,3)
+
 
 x = tf.placeholder(tf.float32, shape=[None,4])
-y = tf.placeholder(tf.float32, shape=[None,1])
+y = tf.placeholder(tf.float32, shape=[None,3])
 
-W = tf.Variable(tf.random_normal([4,1]),name='weight') 
-b = tf.Variable(tf.random_normal([1]),name='bias')
+W = tf.Variable(tf.random_normal([4,3]),name='weight') 
+b = tf.Variable(tf.random_normal([3]),name='bias')
 
 hypothesis = tf.nn.softmax(tf.matmul(x,W)+b) # matmul - 행렬 연산을 해준다
 
@@ -31,14 +33,7 @@ cost = tf.reduce_mean(-tf.reduce_sum(y*tf.log(hypothesis),axis=1))
 optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.05).minimize(cost)
 # train = optimizer.minimize(cost)
 
-x_train, x_test,y_train,y_test = train_test_split(x_data, y_data,test_size=0.2, random_state=55)
-
-
-# 준비만 하고 있는 것
-# predicted = tf.argmax(hypothesis,1)
-# accuracy = tf.reduce_mean(tf.cast(tf.equal(predicted,y),dtype=tf.float32))
-# tf.cast
-# >> 조건에 따른 True, False의 판단 기준에 따라 True면 1, False면 0 반환
+x_train, x_test,y_train,y_test = train_test_split(x_data, aaa,test_size=0.2, random_state=55)
 
 
 with tf.Session() as sess:
@@ -56,8 +51,8 @@ with tf.Session() as sess:
     print("Accuracy:",sess.run(accuracy,feed_dict={x:x_test,y:y_test}))
 
 
-    """
-    GYU code
-    predicted = tf.arg_max(hypo,1)
-    acc = tf.reduce_mean(tf.cast(tf.equal(predicted, tf.argmax(y,1)), dtype=tf.float32))
-    """
+    
+    # GYU code
+    # predicted = tf.arg_max(hypo,1)
+    # acc = tf.reduce_mean(tf.cast(tf.equal(predicted, tf.argmax(y,1)), dtype=tf.float32))
+    
