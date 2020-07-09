@@ -37,7 +37,7 @@ accuracy = tf.reduce_mean(tf.cast(tf.equal(predicted,y),dtype=tf.float32))
 
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer()) # 초기화==선언
-    for step in range(5001):
+    for step in range(5001): #(epoch부분)
         cost_val, _ = sess.run([cost,train],feed_dict={x:x_train,y:y_train})
         if step % 100==0:
             print(step, cost_val)
