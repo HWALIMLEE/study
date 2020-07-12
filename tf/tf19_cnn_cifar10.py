@@ -18,6 +18,7 @@ print(unique) # [0 1 2 3 4 5 6 7 8 9]
 # session열면 닫아야 함
 # with문 써주든가
 # 아니면 sess.close()해주든가
+# one_hot_encoder
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
     y_train = sess.run(tf.one_hot(y_train,10))
@@ -28,7 +29,7 @@ y_test=y_test.reshape(-1,10)
 # y_data = y_data.reshape(y_data.shape[0],1)
 
 x = tf.placeholder(tf.float32, shape=[None,32,32,3])
-x_img = tf.reshape(x,[-1,32,32,3])
+x_img = tf.reshape(x,[-1,32,32,3]) # 4차원으로 변경
 y = tf.placeholder(tf.float32, shape=[None,10])
 
 
@@ -65,12 +66,26 @@ L2 = tf.nn.max_pool(L2,ksize=[1,2,2,1],strides=[1,2,2,1],padding="SAME")
 
 print(L2) # (?, 8, 8, 64)
 
+
+# w3 = tf.get_variable("w2",shape=[3, 3, 64, 64])  
+# print("=============================w3====================")
+# print(w3) # (3, 3, 32, 64)
+
+# L3 = tf.nn.conv2d(L2, w3,strides=[1,1,1,1],padding="SAME") 
+# print("=============================L3========================")
+# print(L3) # (?, 16, 16, 64)
+# L3 = tf.nn.selu(L3) 
+# L3 = tf.nn.max_pool(L3,ksize=[1,2,2,1],strides=[1,2,2,1],padding="SAME") 
+
+# """
+
+
 L2_flat = tf.reshape(L2, [-1,8*8*64]) #(-1,7,7,64)
 # 최종 아웃풋
-w3 = tf.get_variable("w5",shape=[8*8*64,10],initializer=tf.contrib.layers.xavier_initializer()) # Variable===>get.Variable
+w4 = tf.get_variable("w4",shape=[8*8*64,10],initializer=tf.contrib.layers.xavier_initializer()) # Variable===>get.Variable
 # (w1 = tf.Variable(tf.random_normal([784,512]),name='weight'))
-b3 = tf.Variable(tf.random_normal([10]))
-hypothesis = tf.nn.softmax(tf.matmul(L2_flat,w3)+b3)
+b4 = tf.Variable(tf.random_normal([10]))
+hypothesis = tf.nn.softmax(tf.matmul(L2_flat,w4)+b4)
 
 
 cost = tf.reduce_mean(-tf.reduce_sum(y*tf.log(hypothesis),axis=1)) # categorical crossentropy 풀어쓴 것
