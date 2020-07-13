@@ -10,6 +10,7 @@ def index():
 if __name__=='__main__':
     app.run(host='127.0.0.1',port=5000,debug=False)
 
+
 # 네이버가 출력된다
 # redirect = 바로 그 홈페이지로 연결해주는 것(바로 네이버와 연결)
 
