@@ -2,7 +2,8 @@
 
 from flask import Flask
 
-app = Flask(__name__) # 플라스크 정의
+# 플라스크 정의
+app = Flask(__name__) 
  
 @app.route('/')
 def hello333():
