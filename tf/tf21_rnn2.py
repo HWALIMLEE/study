@@ -74,6 +74,5 @@ with tf.Session() as sess:
         loss, _ = sess.run([cost,train],feed_dict={X : x_data,Y : y_data})
         result = sess.run(prediction, feed_dict={X:x_data}) # 이번에는 train, test 나누지 않음
         print(i,"loss:",loss,"prediction:", result ,"true Y:",y_data)
-
 # tensorflow는 거꾸로 올라간다
           
