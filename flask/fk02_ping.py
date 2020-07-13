@@ -8,7 +8,7 @@ app = Flask(__name__)
 def hello333():
     return '<h1>hello world</h1>'
 
-@app.route('/ping', methods=['GET'])            # GET 방식으로 땡겨 오겠다. post도 있기는 함
+@app.route('/ping', methods=['GET'])         # GET 방식으로 땡겨 오겠다. post도 있기는 함
 def ping():
     return '<h1>pong</h1>'
 
