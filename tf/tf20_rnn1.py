@@ -142,6 +142,5 @@ with tf.Session() as sess:
 
         result_str = [idx2char[c] for c in np.squeeze(result)]
         print("\nPredction Str:","".join(result_str)) # 문자로 출력하겠다
-
 # tensorflow는 거꾸로 올라간다
           
