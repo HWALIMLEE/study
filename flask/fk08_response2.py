@@ -37,6 +37,7 @@ def teardodwn_appcontext(exception):
 
 if __name__=='__main__':
     app.run(host='127.0.0.1')
+
 # 플라스크 기본 포트 : 5000
 
 # route가 돌아가기 전에 before_first_request가 먼저 돌아감
