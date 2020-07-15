@@ -1,0 +1,7 @@
+{% for row in rows%}
+
+<a href = '/modi?id={{row[0]}}'> {{row[1]}} </a>  <!--따로 app.route('./modi')로 안해도 modi로 보낸다--> 
+
+
+<br>
+{% endfor %}
