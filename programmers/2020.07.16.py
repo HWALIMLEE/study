@@ -5,6 +5,15 @@ def solution(arr1, arr2):
          answer.append([x+y for x,y in zip(i,k)])
     return answer
 
+# 다른풀이
+import numpy as np
+def solution(arr1, arr2):
+    arr1 = np.array(arr1)
+    arr2 = np.array(arr2)
+    answer = arr1 + arr2
+    return answer.tolist()
+
+
 # x만큼 간격이 있는 n개의 숫자
 def solution(x, n):
     answer=[]
@@ -15,3 +24,7 @@ def solution(x, n):
             answer.append(0)
         return answer
 
+# 다른 풀이
+def solution(x, n):
+    answer = [i*x for i in range(1,n+1)]
+    return answer
