@@ -57,9 +57,7 @@ model.summary()
 
 #3. 실행
 model.compile(optimizer='adam',loss='mse',metrics=['mse']) #metrics하나 안하나 상관없다.
-from keras.callbacks import EarlyStopping
-early_stopping=EarlyStopping(monitor='loss',patience=10, mode='aut')
-model.fit([x1,x2],y,epochs=100,batch_size=1)
+model.fit([x1,x2],y,epochs=1000,batch_size=1)
 
 #그러나 예측을 할 때는 데이터의 개수가 주어지고 그것의 형태를 맞춰주어야 한다. 
 #(3,) 와꾸가 안맞음--->(1,3,1)로 변환 (행, 열, 몇개로 쪼갤건지)

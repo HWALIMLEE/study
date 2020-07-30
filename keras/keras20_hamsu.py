@@ -34,7 +34,7 @@ from keras.layers import Dense, Input #inputlayer명시
 # model.add(Dense(1))
 
 #dense1으로 다 똑같이 쓰면 하나의 블럭으로 처리됨
-input1=Input(shape=(3,)) # 변수명은 소문자(암묵적약속)
+input1=Input(shape=(3,)) # 변수명은 소문자(암묵적약속) #shape는 행 무시(LSTM은 2개 적어주고, Dense는 1개 적어주고)
 dense1=Dense(5,activation='relu')(input1) #input명시해주어야 함
 dense1=Dense(4,activation='relu')(dense1)
 dense1=Dense(10,activation='relu')(dense1)
