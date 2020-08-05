@@ -37,7 +37,7 @@ print(x_test.shape)
 
 
 model = autoencoder(hidden_layer_size=154) 
-
+"""
 model.compile(optimizer='adam',loss='binary_crossentropy',metrics=['acc']) 
 
 model.fit(x_train,x_train, epochs=20)
@@ -70,3 +70,4 @@ for i, ax in enumerate([ax6, ax7, ax8, ax9, ax10]):
 
 plt.tight_layout()
 plt.show()
+"""
