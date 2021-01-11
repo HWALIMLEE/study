@@ -1,0 +1,23 @@
+# 딕셔너리 자료형 공부
+def solution(record):
+    answer =[]
+    output = []
+    inuser = {}
+    # 1
+    for i in record:
+        command = i.split(" ")
+        # 2
+        if command[0] == 'Leave':
+            output.append([command[1],"님이 나갔습니다."])
+        # 3
+        elif command[0] == 'Enter':
+            inuser[command[1]] = command[2]
+            output.append([command[1],"님이 들어왔습니다."])
+        # 4
+        elif command[0] == 'Change':
+            inuser[command[1]] = command[2]
+    # 5
+    for log in output:
+        answer.append(inuser[log[0]]+log[1])
+    # 6
+    return answer
